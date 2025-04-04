@@ -11,6 +11,8 @@ dados_empresa = pd.read_excel('colaboradores.xlsx', nrows=3, header=None)
 cnpj = dados_empresa.iloc[1, 1]  # CNPJ está na célula B2
 razao_social = dados_empresa.iloc[2, 1]  # Razão social está na célula B3
 data = dados_empresa.iloc[0, 2]  # Data está na célula C3
+# Converte a data para o formato desejado
+data = pd.to_datetime(data).strftime('%d de %B de %Y') # Exemplo: 04 de abril de 2025
 
 # Nome do arquivo de saída
 nome_arquivo = 'RECIBO DE PAGAMENTO DOS DOMINGOS GRAVATAI.docx'
