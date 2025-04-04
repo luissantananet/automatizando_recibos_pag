@@ -56,11 +56,3 @@ for _, row in colaboradores.iterrows():
 
 # Salva o arquivo de recibos
 document.save(nome_arquivo)
-
-"""
-CMD:
-usar a ferramenta PyInstaller para transformar seu código Python em um executável (.exe). 
->>Agora, navegue até o diretório onde seu script Python está localizado e execute o seguinte comando:
-pyinstaller --onefile seu_script.py
->>Substitua seu_script.py pelo nome do seu arquivo Python. A opção --onefile faz com que todos os arquivos sejam agrupados em um único executável.
->>Depois que o PyInstaller terminar, você encontrará seu arquivo .exe na pasta dist."""
