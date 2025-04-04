@@ -1,6 +1,6 @@
 # Automatizando Recibos Pagamentos
 
-Um aplicação desenvolvido em Python para coletar dados de um arquivo .xlsx e criar o .docx com os dados e texto pre-definidos.
+Um aplicação desenvolvido em Python para coletar dados de um arquivo .xlsx e criar o .docx com os dados e texto pré-definidos.
 
 
 
