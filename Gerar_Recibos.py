@@ -2,6 +2,11 @@ import pandas as pd
 from docx import Document
 from docx.shared import Pt
 import os
+import locale
+
+
+# Configura o locale para português do Brasil
+locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
 # Carrega a lista de colaboradores do arquivo Excel, ignorando as primeiras 4 linhas
 colaboradores = pd.read_excel('colaboradores.xlsx', skiprows=4)
