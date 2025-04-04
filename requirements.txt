@@ -1,2 +1,2 @@
 pandas = 2.2.3
-ndocx = 0.1.2
+docx = 0.2.4
