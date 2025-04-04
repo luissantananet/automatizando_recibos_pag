@@ -3,8 +3,14 @@ from docx import Document
 from docx.shared import Pt
 import os
 
-# Carrega a lista de colaboradores do arquivo Excel
-colaboradores = pd.read_excel('colaboradores.xlsx')
+# Carrega a lista de colaboradores do arquivo Excel, ignorando as primeiras 4 linhas
+colaboradores = pd.read_excel('colaboradores.xlsx', skiprows=4)
+
+# Carrega o CNPJ, razão social e data manualmente
+dados_empresa = pd.read_excel('colaboradores.xlsx', nrows=3, header=None)
+cnpj = dados_empresa.iloc[1, 1]  # CNPJ está na célula B2
+razao_social = dados_empresa.iloc[2, 1]  # Razão social está na célula B3
+data = dados_empresa.iloc[0, 2]  # Data está na célula C3
 
 # Nome do arquivo de saída
 nome_arquivo = 'RECIBO DE PAGAMENTO DOS DOMINGOS GRAVATAI.docx'
@@ -26,27 +32,19 @@ for _, row in colaboradores.iterrows():
     cpf = str(row['cpf'])  # Converte o CPF para string
     valor = str(row['valor'])  # Converte o valor para string
     
+    texto = (
+        f"RECIBO DE PAGAMENTO\n"
+        f"{nome}, inscrito(a) no CPF sob o nº {cpf}, declaro para os devidos fins ter recebido nesta data, "
+        f"da empresa {razao_social}, inscrita no CNPJ sob o nº {cnpj}, a importância de R${valor} "
+        f"concernente ao pagamento de um domingo trabalhado.\n\n"
+        f"Cachoeirinha, {data}.\n\n"
+        f"_________________________________________________\n"
+        f"Assinatura\n"
+    )
+    
     p = document.add_paragraph()
-    run = p.add_run("RECIBO DE PAGAMENTO\n")
-    
-    run = p.add_run(f"{nome}, ")
-    run.bold = True
-    run.font.size = bold_font_size
-    
-    run = p.add_run("inscrito(a) no CPF sob o nº ")
-    
-    run = p.add_run(cpf)
-    run.bold = True
-    run.font.size = bold_font_size
-    
-    run = p.add_run(", declaro para os devidos fins ter recebido nesta data, da empresa KFP SERVICE DIGITAL LTDA, inscrita no CNPJ sob o nº 41.230.154/0001-57, a importância de R$")
-    
-    run = p.add_run(valor)
-    run.bold = True
-    run.font.size = bold_font_size
-    
-    run = p.add_run(" concernente ao pagamento de um domingo trabalhado.\n\nCachoeirinha, 29 de setembro de 2024.\n\n_________________________________________________\nAssinatura\n")
-    
+    run = p.add_run(texto)
+    run.font.size = font_size  # Define o tamanho da fonte padrão
     document.add_paragraph('\n')
 
 # Salva o arquivo de recibos
